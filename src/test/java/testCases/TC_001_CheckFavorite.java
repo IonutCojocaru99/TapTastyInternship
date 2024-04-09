@@ -1,6 +1,7 @@
 
 package testCases;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.HomePage;
@@ -9,6 +10,7 @@ import testBase.BaseClass;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.openqa.selenium.By.xpath;
 import static org.testng.Assert.fail;
 
 //TC_001_CheckFavorite
@@ -16,6 +18,7 @@ import static org.testng.Assert.fail;
 //2. User logged in;
 //3. Go to the menu and select a product;
 //4. Click on favorite button;
+//5. Check if the product is save in favorites
 
 public class TC_001_CheckFavorite extends BaseClass{
 
@@ -45,7 +48,21 @@ public class TC_001_CheckFavorite extends BaseClass{
 			logger.info("Click gustari");
 			regpage.cartofi();
 			logger.info("Click cartofi");
+			regpage.favcartofi();
+			logger.info("Cartofi favoriti salvati");
+			if(driver.findElement(xpath("//div[@class='dialog-text']")).isDisplayed())
+			{
+				logger.info("Produs salvat la favorte");
+				Object ObiectActual_message = driver.findElement(xpath("//div[@class='dialog-text']")).getText();
+				String Expectet_message = "Produsul a fost adăugat la Favorite!";
+				Assert.assertEquals(ObiectActual_message, Expectet_message);
+			}
 
+			if(driver.findElement(xpath("//div[@class='dialog-text']")).isDisplayed())
+			{
+				logger.info("Pop-up aparat");
+				regpage.okselect();
+			}
 		}
 		catch(Exception e)
 		{

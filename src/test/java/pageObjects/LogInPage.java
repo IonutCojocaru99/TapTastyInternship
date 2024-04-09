@@ -44,4 +44,15 @@ public class LogInPage extends BasePage {
     public void cartofi() {
         cartofiselect.click();
     }
+    @FindBy(xpath="//i[@class='vertical--align--middle icon material-icons']")
+    WebElement cartofifavoriti;
+    public void favcartofi() {
+        cartofifavoriti.click();
+    }
+
+    @FindBy(xpath="//span[@class='dialog-button dialog-button-bold']")
+    WebElement selectok;
+    public void okselect() {
+        selectok.click();
+    }
 }
